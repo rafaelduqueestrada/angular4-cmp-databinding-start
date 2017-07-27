@@ -18,6 +18,8 @@ export class CockpitComponent implements OnInit {
   }
 
   onAddServer() {
+    console.log('Call: CockpitComponent -> onAddServer');
+    console.log('serverCreated: ' + this.serverCreated);
     this.serverCreated.emit({
       serverName: this.newServerName,
       serverContent: this.newServerContent
