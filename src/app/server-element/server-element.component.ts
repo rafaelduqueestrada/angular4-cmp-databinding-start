@@ -1,6 +1,7 @@
 import {
   Component, OnInit, Input, OnChanges, SimpleChanges, DoCheck, AfterContentInit,
-  AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, ViewChild, ElementRef
+  AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, ViewChild, ElementRef,
+  ContentChild
 } from '@angular/core';
 
 @Component({
@@ -14,6 +15,7 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
   @Input() element: {type: string, name: string, content: string};
   @Input() name: string;
   @ViewChild('heading') header: ElementRef;
+  @ContentChild('contentParagraph') paragraph: ElementRef;
 
   constructor() {
     console.log('constructor called!');
@@ -29,6 +31,7 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
   ngOnInit() {
     console.log('ngOnInit called!');
     console.log('The value of header is: ' + this.header.nativeElement.textContent);
+    console.log('The value of paragraph is: ' + this.paragraph.nativeElement.textContent);
     console.log('####################');
   }
 
@@ -37,8 +40,10 @@ export class ServerElementComponent implements OnInit, OnChanges, DoCheck, After
     console.log('####################');
   }
 
+  // We can't use the content child paragraph before this method on lifecycle
   ngAfterContentInit() {
     console.log('ngAfterContentInit called!');
+    console.log('The value of paragraph is: ' + this.paragraph.nativeElement.textContent);
     console.log('####################');
   }
 
